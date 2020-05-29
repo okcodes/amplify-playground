@@ -1,0 +1,38 @@
+enum AccountType {
+  CASH
+  CREDIT_CARD
+  GIFT_CARD
+  CRYPTO
+}
+
+type Account
+@model
+@auth(
+  rules: [
+    {allow: owner, ownerField: "owner", operations: [create, update, delete, read]},
+  ])
+{
+  id: ID!
+  name: String!
+  balance: Float!
+  type: AccountType!
+  currency: String!
+  owner: String
+}
+
+type Operation
+@model
+@key(name: "byOwner", fields: ["owner", "date"], queryField: "listOperationsByOwner")
+@auth(
+  rules: [
+    {allow: owner, ownerField: "owner", operations: [create, update, delete, read]},
+  ])
+{
+  id: ID!
+  amount: Float!
+  date: AWSDateTime!
+  description: String!
+  accountID: ID!
+  account: Account @connection(fields: ["accountID"])
+  owner: String
+}
