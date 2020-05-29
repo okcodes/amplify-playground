@@ -4,6 +4,10 @@ import './App.css';
 import {createBrowserHistory} from "history";
 import {Example1} from "./pages/example-1/Example1";
 import {Example2} from "./pages/example-2/Example2";
+import {Amplify} from "aws-amplify";
+import awsConfig from './aws-exports';
+
+Amplify.configure(awsConfig);
 
 const browserHistory = createBrowserHistory();
 
