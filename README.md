@@ -12,3 +12,9 @@ amplify init
 amplify add api
 ```
 
+## Step 3: Push changes to the cloud
+
+```shell script
+amplify push
+```
+
